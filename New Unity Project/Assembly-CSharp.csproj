@@ -53,7 +53,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\TwitchChat.cs" />
+     <Compile Include="Assets\Clock\Scripts\Clock.cs" />
+     <Compile Include="Assets\Scripts\BannerScript.cs" />
+     <Compile Include="Assets\Scripts\TestClock.cs" />
+     <Compile Include="Assets\Scripts\TwitchChat.cs" />
  <Reference Include="UnityEditor.StandardEvents">
  <HintPath>E:/StreamRoom/StreamNumber043/New Unity Project/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
  </Reference>
