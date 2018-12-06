@@ -25,7 +25,7 @@ public class Clock : MonoBehaviour {
 	Text timeTextText;
 
     int seconds;
-    float msecs;
+//    float msecs;
 	string text;
     GameObject pointerSeconds;
     GameObject pointerMinutes;
@@ -45,7 +45,7 @@ void Start()
 			currentTime = transform.Find ("timeText").gameObject;
 		}
 		*/
-    msecs = 0.0f;
+//    msecs = 0.0f;
     seconds = 0;
 }
 //-----------------------------------------------------------------------------------------------------------------------------------------
@@ -59,7 +59,7 @@ void Update()
 
     //-- calculate time
 
-		msecs = System.DateTime.Now.Millisecond;
+//		msecs = System.DateTime.Now.Millisecond;
 		seconds =  Mathf.RoundToInt(System.DateTime.Now.Second);
 		minutes =  Mathf.RoundToInt(System.DateTime.Now.Minute);
 		hour =  Mathf.RoundToInt(System.DateTime.Now.Hour);

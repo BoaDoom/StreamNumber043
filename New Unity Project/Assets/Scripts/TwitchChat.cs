@@ -1,4 +1,4 @@
-﻿﻿using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
@@ -19,6 +19,7 @@ public class TwitchChat : MonoBehaviour {
 	//public Rigidbody player;
 	//public int speed;
 
+
 	void Start () {
 		Connect();
 	}
@@ -31,6 +32,7 @@ public class TwitchChat : MonoBehaviour {
 
 		ReadChat();
 	}
+
 
 	private void Connect()
 	{

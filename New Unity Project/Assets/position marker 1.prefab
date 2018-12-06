@@ -22,7 +22,6 @@ GameObject:
   - component: {fileID: 33013575561423570}
   - component: {fileID: 23637164861175082}
   - component: {fileID: 65240567267146992}
-  - component: {fileID: 114202677950260480}
   m_Layer: 0
   m_Name: position marker 1
   m_TagString: positionMarker
@@ -97,22 +96,3 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114202677950260480
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1131532907922378}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a7d2f15dbd61f44ab025a5e232de133, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timePassed: 0
-  timeAtMovementStart: 0
-  timeToSpendAtLocation: 0
-  randomTime: 0
-  minMaxTimeAtLocation: {x: 5, y: 15}
-  startingLocation: {x: 0, y: 0, z: 0}
-  listOfLocationMarkers: []
-  lockedStartingLocation: {x: -2.71, y: 6.5, z: 460.5}

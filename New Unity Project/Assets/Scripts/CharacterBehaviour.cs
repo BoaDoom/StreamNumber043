@@ -5,10 +5,13 @@ using UnityEngine;
 public class CharacterBehaviour : MonoBehaviour {
 	GameObject characterCube;
 
+	public int lastLocation = -1;
+	//public float timePassed;
 
-	public float timePassed;
-	public float timeAtMovementStart = 0;
-	public float timeToSpendAtLocation;
+	public float smoothing = 7f;
+	public float timeAtArriving = 0;
+	public float timeToSpendAtLocation = 5f;
+	//public float internalTime;
 
 	public float randomTime = 0f;
 	//public float timePassedSinceMovement;
@@ -22,30 +25,51 @@ public class CharacterBehaviour : MonoBehaviour {
 	public Vector3 lockedStartingLocation = new Vector3(-2.71f, 6.5f, 460.5f);
 
 	void Start () {
-		startingLocation = gameObject.transform.position;
+		Debug.Log ("Start");
 		listOfLocationMarkers = GameObject.FindGameObjectsWithTag("positionMarker");
 		periodOfPossibleMovement = minMaxTimeAtLocation.y - minMaxTimeAtLocation.x;
-		moveToNewPosish ();
+		StartCoroutine(timerCheck(timeToSpendAtLocation));
 	}
-	
+
 	// Update is called once per frame
-	void Update () {
-		if (timeToSpendAtLocation > Time.time) {
-			moveToNewPosish ();
+	IEnumerator timerCheck (float timeToCheck) {
+		while (timeToCheck > Time.time) {
+			yield return null;
 		}
+		Debug.Log ("timerCheck complete");
+		StopCoroutine("chooseNewLocation");
+		StartCoroutine("chooseNewLocation");
+		yield return null;
 	}
 
-	public void moveToNewPosish(){
-		chooseNewLocation ();
-		timeAtMovementStart = Time.time;
+	//public void moveToNewPosish(){
+
+
+		//chooseNewLocation ();
+		//internalTime = Time.time;
+
+	//}
+
+	IEnumerator chooseNewLocation(){
+		int lengthOfListOfLocationMarkers = listOfLocationMarkers.Length;
+		int rnd = Random.Range (0, (lengthOfListOfLocationMarkers));
+		while (rnd == lastLocation) {
+			rnd = Random.Range (0, (lengthOfListOfLocationMarkers));
+		}
+		lastLocation = rnd;
+		Vector3 targetPosition = listOfLocationMarkers[rnd].GetComponent<Transform>().position;
+		Debug.Log(rnd);
+		while(Vector3.Distance(transform.position, targetPosition) > 0.5f){
+			gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, targetPosition, smoothing *Time.deltaTime);
+			yield return null;
+		}
+
+		timeAtArriving = Time.time;
 		randomTime = minMaxTimeAtLocation.x +(periodOfPossibleMovement * Random.value);
-		timeToSpendAtLocation = timeAtMovementStart + randomTime;
+		timeToSpendAtLocation = timeAtArriving + randomTime;
+		StopCoroutine("timerCheck");
+		StartCoroutine(timerCheck(timeToSpendAtLocation));
+		yield return null;
 	}
-
-	public void chooseNewLocation(){
-		int lengthOfListOfLocationMarkers = listOfLocationMarkers.Length
-		Random rnd = Random.Range (0, ((listOfLocationMarkers.Length) - 1));
-		//int r = rnd.Range  listOfLocationMarkers.Count;
-		gameObject.transform = listOfLocationMarkers[rnd].GetComponent(transform);
-	}
+		
 }
