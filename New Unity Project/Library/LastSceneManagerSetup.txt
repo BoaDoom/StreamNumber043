@@ -1,4 +1,1 @@
-sceneSetups:
-- path: Assets/TutorialScene_001 crashing fix.unity
-  isLoaded: 1
-  isActive: 1
+sceneSetups: []
