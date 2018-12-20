@@ -25,7 +25,7 @@ public class CharacterBehaviour : MonoBehaviour {
 	public Vector3 lockedStartingLocation = new Vector3(-2.71f, 6.5f, 460.5f);
 
 	void Start () {
-		Debug.Log ("Start");
+		//Debug.Log ("Start");
 		listOfLocationMarkers = GameObject.FindGameObjectsWithTag("positionMarker");
 		periodOfPossibleMovement = minMaxTimeAtLocation.y - minMaxTimeAtLocation.x;
 		StartCoroutine(timerCheck(timeToSpendAtLocation));
@@ -36,7 +36,7 @@ public class CharacterBehaviour : MonoBehaviour {
 		while (timeToCheck > Time.time) {
 			yield return null;
 		}
-		Debug.Log ("timerCheck complete");
+		//Debug.Log ("timerCheck complete");
 		StopCoroutine("chooseNewLocation");
 		StartCoroutine("chooseNewLocation");
 		yield return null;
@@ -51,7 +51,7 @@ public class CharacterBehaviour : MonoBehaviour {
 		}
 		lastLocation = rnd;
 		Vector3 targetPosition = listOfLocationMarkers[rnd].GetComponent<Transform>().position;
-		Debug.Log(rnd);
+		//Debug.Log(rnd);
 		while(Vector3.Distance(transform.position, targetPosition) > 0.01f){
 			gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, targetPosition, smoothing *Time.deltaTime);
 			yield return null;

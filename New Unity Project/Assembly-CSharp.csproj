@@ -56,6 +56,7 @@
      <Compile Include="Assets\Clock\Scripts\Clock.cs" />
      <Compile Include="Assets\Scripts\BannerScript.cs" />
      <Compile Include="Assets\Scripts\CharacterBehaviour.cs" />
+     <Compile Include="Assets\Scripts\Sunlight.cs" />
      <Compile Include="Assets\Scripts\TestClock.cs" />
      <Compile Include="Assets\Scripts\TwitchChat.cs" />
  <Reference Include="UnityEditor.StandardEvents">
