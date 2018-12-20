@@ -41,14 +41,7 @@ public class CharacterBehaviour : MonoBehaviour {
 		StartCoroutine("chooseNewLocation");
 		yield return null;
 	}
-
-	//public void moveToNewPosish(){
-
-
-		//chooseNewLocation ();
-		//internalTime = Time.time;
-
-	//}
+		
 
 	IEnumerator chooseNewLocation(){
 		int lengthOfListOfLocationMarkers = listOfLocationMarkers.Length;
@@ -59,7 +52,7 @@ public class CharacterBehaviour : MonoBehaviour {
 		lastLocation = rnd;
 		Vector3 targetPosition = listOfLocationMarkers[rnd].GetComponent<Transform>().position;
 		Debug.Log(rnd);
-		while(Vector3.Distance(transform.position, targetPosition) > 0.5f){
+		while(Vector3.Distance(transform.position, targetPosition) > 0.01f){
 			gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, targetPosition, smoothing *Time.deltaTime);
 			yield return null;
 		}
