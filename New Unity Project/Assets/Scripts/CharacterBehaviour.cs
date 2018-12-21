@@ -6,15 +6,12 @@ public class CharacterBehaviour : MonoBehaviour {
 	GameObject characterCube;
 
 	public int lastLocation = -1;
-	//public float timePassed;
 
 	public float smoothing = 7f;
 	public float timeAtArriving = 0;
 	public float timeToSpendAtLocation = 5f;
-	//public float internalTime;
 
 	public float randomTime = 0f;
-	//public float timePassedSinceMovement;
 	public Vector2 minMaxTimeAtLocation = new Vector2 (5f, 15f);
 	private float periodOfPossibleMovement;
 
@@ -25,18 +22,15 @@ public class CharacterBehaviour : MonoBehaviour {
 	public Vector3 lockedStartingLocation = new Vector3(-2.71f, 6.5f, 460.5f);
 
 	void Start () {
-		//Debug.Log ("Start");
 		listOfLocationMarkers = GameObject.FindGameObjectsWithTag("positionMarker");
 		periodOfPossibleMovement = minMaxTimeAtLocation.y - minMaxTimeAtLocation.x;
 		StartCoroutine(timerCheck(timeToSpendAtLocation));
 	}
-
-	// Update is called once per frame
+		
 	IEnumerator timerCheck (float timeToCheck) {
 		while (timeToCheck > Time.time) {
 			yield return null;
 		}
-		//Debug.Log ("timerCheck complete");
 		StopCoroutine("chooseNewLocation");
 		StartCoroutine("chooseNewLocation");
 		yield return null;

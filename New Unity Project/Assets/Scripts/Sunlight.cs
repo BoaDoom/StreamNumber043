@@ -3,44 +3,44 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Sunlight : MonoBehaviour {
-	public Transform targetRotation;
-	public Transform targetStartRotation;
-	public float totalRotationTimeMinutes = 10f;
-	public float startingAngle = -90f;
-	private float timeCount = 0f;
+	//public Transform targetRotation;
+	//public Transform targetStartRotation;
+	public float totalRotationHours = 1f;
+	private float totalRotationSeconds;
+	private bool timeGo = true;
+	private float rotationPercentage = 0;
+
+	public AnimationCurve seasonsCurve;
+	public AnimationCurve yearCurve;
+
+	private float sunNorthSouth;
+	public float sunNorthSouthMaxCurve = 45f;
+	//public float smoothing = 1;
 	void Start () {
-		//gameObject.transform.localRotation.Set(startingAngle, 0f,0f, 1);
-		targetStartRotation = gameObject.transform;
-		targetRotation = gameObject.transform;
+		totalRotationSeconds = totalRotationHours * 60 * 60;
+		//sunNorthSouthAmp = new Vector2 ();
 		StopCoroutine("sunUpdate");
-		Debug.Log (" STARTANGLE! x "+gameObject.transform.localRotation.x+" y "+gameObject.transform.localRotation.y+" z "+gameObject.transform.localRotation.z+" w "+gameObject.transform.localRotation.w);
 		StartCoroutine("sunUpdate");
 	}
-
-//	IEnumerator cusStartUp(){
-		//StopCoroutine("cusStartUp");
-		//StopCoroutine("startRotation");
-		//StartCoroutine("startRotation");
-		//yield return null;
-//	}
+		
 	IEnumerator sunUpdate(){
 	//IEnumerator startRotation(){
 	// Update is called once per frame
-		while(targetRotation.localEulerAngles.x < 630f){
-			Debug.Log (" ! "+gameObject.transform.eulerAngles.x);
-			//gameObject.transform.eulerAngles = Vector3.Slerp(gameObject.transform.eulerAngles, targetRotation, (smoothing *Time.deltaTime));*Time.deltaTime
-			//targetRotation = new Vector3( (targetRotation.x + (360f/(totalRotationTimeMinutes)/60)*Time.deltaTime), 0f, 0f);
-			targetRotation.localRotation = Quaternion.Slerp(targetRotation.localRotation, targetStartRotation.localRotation, 1f);
-			timeCount = timeCount + Time.deltaTime;
-			gameObject.transform.localRotation = targetRotation.localRotation;
+		while(timeGo){
+			rotationPercentage = (Time.deltaTime/totalRotationSeconds) + rotationPercentage;
+			sunNorthSouth = seasonsCurve.Evaluate(rotationPercentage) * sunNorthSouthMaxCurve;
+			//Debug.Log ("angle calced " + sunNorthSouth);
+			gameObject.transform.eulerAngles = new Vector3((rotationPercentage*360), sunNorthSouth, 0f);		//360 being a full rotation of the sun
+
 			yield return null;
 		}
-		//Debug.Log ("OUT OF LOOP");
-		//targetRotation = Vector3.zero;
-		targetRotation = targetStartRotation;
-		gameObject.transform.localRotation = targetStartRotation.localRotation;
+		Debug.Log ("OUT OF LOOP");
 		StopCoroutine("sunUpdate");
-		StartCoroutine("sunUpdate");
-		yield return null;
+		if (timeGo) {
+			StartCoroutine ("sunUpdate");
+			yield return null;
+		} else {
+			yield return null;
+		}
 	}
 }
